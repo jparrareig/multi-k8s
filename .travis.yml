@@ -14,7 +14,6 @@ after_success:
     - docker build -t javi/multi-nginx ./nginx
     - docker build -t javi/multi-server ./sever
     - docker build -t javi/multi-worker ./worker
-
     # Log in docker CLI
     #- docker login -p $DOCKER_PASSWORD -u $DOCKER_ID
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
