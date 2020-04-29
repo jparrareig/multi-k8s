@@ -3,21 +3,19 @@ services:
     - docker
 
 before_install:
-    - docker build -t javi/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t jparrareig/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true javi/react-test npm test
+    - docker run -e CI=true jparrareig/react-test npm test
 
 after_success:
-    - docker build -t javi/multi-client ./client
-    - docker build -t javi/multi-nginx ./nginx
-    - docker build -t javi/multi-server ./sever
-    - docker build -t javi/multi-worker ./worker
+    - docker build -t jparrareig/multi-client ./client
+    - docker build -t jparrareig/multi-nginx ./nginx
+    - docker build -t jparrareig/multi-server ./sever
+    - docker build -t jparrareig/multi-worker ./worker
     
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-    - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
-    - docker push javi/multi-client
-    - docker push javi/multi-nginx
-    - docker push javi/multi-server
-    - docker push javi/multi-worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push jparrareig/multi-client
+    - docker push jparrareig/multi-nginx
+    - docker push jparrareig/multi-server
+    - docker push jparrareig/multi-worker
