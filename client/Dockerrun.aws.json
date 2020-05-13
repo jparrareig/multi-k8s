@@ -1,0 +1,38 @@
+{
+
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions":  [
+        {
+            "name": "client",
+            "image": "jparrareig/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "jparrareig/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "jparrareig/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "jparrareig/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                "hostPort": 80,
+                "containerPort": 80
+                }
+            ],
+            "links":["server", "client"]
+        }
+    ]
+
+}
